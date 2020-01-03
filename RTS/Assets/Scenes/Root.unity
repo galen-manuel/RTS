@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf1db1e1c70c3843b16eb31fe805c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartUpScene: 2
+  StartUpSceneName: Test_Camera
 --- !u!1 &2005798007
 GameObject:
   m_ObjectHideFlags: 0

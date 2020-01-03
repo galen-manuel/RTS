@@ -30,6 +30,21 @@ namespace COG.RTS
 
         }
 
+        public virtual void Pause()
+        {
+            
+        }
+
+        public virtual void Resume()
+        {
+            
+        }
+
+        public virtual void Stop()
+        {
+            
+        }
+
         /// <summary>
         /// Performs any clean up needed.
         /// </summary>
