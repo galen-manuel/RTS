@@ -11,21 +11,6 @@ namespace COG.RTS.Systems.Camera
 
         public void InitSystem()
         {
-            GameObject mainCameraGo = null;
-            UnityEngine.Camera mainCamera = UnityEngine.Camera.main;
-
-            // Grab main camera game object or create one
-            if (mainCamera == null)
-            {
-                mainCameraGo = new GameObject("MainCamera");
-                mainCamera = mainCameraGo.AddComponent<UnityEngine.Camera>();
-                mainCameraGo.tag = "MainCamera";
-            }
-            else
-            {
-                mainCameraGo = mainCamera.gameObject;
-            }
-            
             CogBehaviourSystem cogBehaviourSystem = MasterSystem.Instance.GetSystem<CogBehaviourSystem>();
 
             if (cogBehaviourSystem == null)
@@ -33,15 +18,23 @@ namespace COG.RTS.Systems.Camera
                 Debug.LogError("CogBehaviourSystem is NULL!");
                 return;
             }
+            
+            GameObject mainCameraGo = null;
+            RTSCamera rtsCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
 
-            _cameraInput = cogBehaviourSystem.AddBehaviour<CameraInput>(mainCameraGo);
+            mainCameraGo = rtsCamera.gameObject;
 
-            _cameraMovement = cogBehaviourSystem.AddBehaviour<CameraMovement>(mainCameraGo);
-            _cameraMovement.XSpeed = 5;
-            _cameraMovement.ZSpeed = 5;
+            _cameraInput = rtsCamera.CameraInput;
+            _cameraMovement = rtsCamera.CameraMovement;
 
-            _cameraInput.Init();
-            _cameraMovement.Init();
+            // _cameraInput = cogBehaviourSystem.AddBehaviour<CameraInput>(mainCameraGo);
+            //
+            // _cameraMovement = cogBehaviourSystem.AddBehaviour<CameraMovement>(mainCameraGo);
+            // _cameraMovement.XSpeed = 5;
+            // _cameraMovement.ZSpeed = 5;
+            //
+            // _cameraInput.Init();
+            // _cameraMovement.Init();
         }
 
         public void UpdateSystem(float pDeltaTime)

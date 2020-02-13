@@ -13,12 +13,18 @@ namespace COG.RTS.Systems.Camera
         private Transform _transform;
         private Vector2 _inputVector;
         private Vector3 _translation;
-
-        public override void Init()
+        
+        private RTSCamera _rtsCamera;
+        
+        public void Init(RTSCamera pRtsCamera)
         {
+            base.Init();
+            
             _transform = transform;
             _inputVector = new Vector2();
             _translation = new Vector3();
+
+            _rtsCamera = pRtsCamera;
         }
 
         public override void CustomUpdate(float pDt)
@@ -29,7 +35,7 @@ namespace COG.RTS.Systems.Camera
 
         public override void CustomLateUpdate(float pDeltaTime)
         {
-            _transform.Translate(_translation * pDeltaTime);
+            _transform.Translate(_translation * pDeltaTime, Space.World);
         }
 
         public override void CleanUp()

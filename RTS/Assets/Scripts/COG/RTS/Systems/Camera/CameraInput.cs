@@ -6,9 +6,13 @@ namespace COG.RTS.Systems.Camera
 {
     public class CameraInput : CogBehaviour
     {
-        public override void Init()
+        private RTSCamera _rtsCamera;
+        
+        public void Init(RTSCamera pRtsCamera)
         {
-            
+            base.Init();
+
+            _rtsCamera = pRtsCamera;
         }
 
         public override void CustomUpdate(float pDt)

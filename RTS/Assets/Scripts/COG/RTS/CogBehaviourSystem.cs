@@ -118,6 +118,20 @@ namespace COG.RTS
             return cogBehaviour;
         }
 
+        public T LoadBehaviour<T>(string path = "") where T : CogBehaviour
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                path = nameof(T);
+            }
+            
+            T cogBehavior = Instantiate(Resources.Load<T>($"CogBehaviours/{path}"));
+            cogBehavior.Init();
+            _cogBehaviours.Add(cogBehavior);
+
+            return cogBehavior;
+        }
+
         public void RegisterUpdateFunction(Action<float> pUpdateFunction)
         {
             _cogBehaviourUpdateFunctions.Add(pUpdateFunction);

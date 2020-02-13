@@ -17,6 +17,7 @@
                   <e p="CameraInput.cs" t="Include" />
                   <e p="CameraMovement.cs" t="Include" />
                   <e p="CameraSystem.cs" t="Include" />
+                  <e p="RTSCamera.cs" t="Include" />
                 </e>
                 <e p="ISystem.cs" t="Include" />
                 <e p="MasterSystem.cs" t="Include" />
