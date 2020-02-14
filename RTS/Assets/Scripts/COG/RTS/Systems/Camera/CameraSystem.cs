@@ -19,22 +19,10 @@ namespace COG.RTS.Systems.Camera
                 return;
             }
             
-            GameObject mainCameraGo = null;
             RTSCamera rtsCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
-
-            mainCameraGo = rtsCamera.gameObject;
 
             _cameraInput = rtsCamera.CameraInput;
             _cameraMovement = rtsCamera.CameraMovement;
-
-            // _cameraInput = cogBehaviourSystem.AddBehaviour<CameraInput>(mainCameraGo);
-            //
-            // _cameraMovement = cogBehaviourSystem.AddBehaviour<CameraMovement>(mainCameraGo);
-            // _cameraMovement.XSpeed = 5;
-            // _cameraMovement.ZSpeed = 5;
-            //
-            // _cameraInput.Init();
-            // _cameraMovement.Init();
         }
 
         public void UpdateSystem(float pDeltaTime)
@@ -51,12 +39,12 @@ namespace COG.RTS.Systems.Camera
 
         public void PauseSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.PauseSystem");
         }
 
         public void ResumeSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.ResumeSystem");
         }
 
         public void ShutdownSystem()
@@ -67,12 +55,12 @@ namespace COG.RTS.Systems.Camera
 
         public void StartSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.StartSystem");
         }
 
         public void StopSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.StopSystem");
         }
     } 
 }

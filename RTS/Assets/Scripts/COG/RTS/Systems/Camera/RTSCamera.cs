@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace  COG.RTS.Systems.Camera
 {
+    /// <summary>
+    /// Coordinates Input and Movement
+    /// </summary>
     public class RTSCamera : CogBehaviour
     {
         public CameraInput CameraInput { get; private set; }
@@ -18,6 +21,11 @@ namespace  COG.RTS.Systems.Camera
             
             CameraInput.Init(this);
             CameraMovement.Init(this);
+        }
+
+        public void PassInput(Vector2 pInputVector2)
+        {
+            CameraMovement.SetInput(pInputVector2);
         }
     }
 }

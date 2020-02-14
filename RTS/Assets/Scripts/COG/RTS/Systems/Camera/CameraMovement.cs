@@ -29,7 +29,6 @@ namespace COG.RTS.Systems.Camera
 
         public override void CustomUpdate(float pDt)
         {
-            _inputVector.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             _translation.Set(_inputVector.x * XSpeed, 0, _inputVector.y * ZSpeed);
         }
 
@@ -40,7 +39,12 @@ namespace COG.RTS.Systems.Camera
 
         public override void CleanUp()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraMovement)}.CleanUp");
+        }
+        
+        public void SetInput(Vector2 pMovement)
+        {
+            _inputVector = pMovement;
         }
 
         public void SetTarget(Transform pTarget)
