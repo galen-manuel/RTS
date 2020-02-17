@@ -34,6 +34,11 @@ namespace COG.RTS.Systems
             {
                 system.UpdateSystem(Time.deltaTime);
             }
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
 
         private void LateUpdate()

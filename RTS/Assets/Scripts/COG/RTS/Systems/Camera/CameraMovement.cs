@@ -13,7 +13,8 @@ namespace COG.RTS.Systems.Camera
         private Transform _transform;
         private Vector2 _inputVector;
         private Vector3 _translation;
-        
+        private Vector3 _velocity;
+
         private RTSCamera _rtsCamera;
         
         public void Init(RTSCamera pRtsCamera)
@@ -34,7 +35,9 @@ namespace COG.RTS.Systems.Camera
 
         public override void CustomLateUpdate(float pDeltaTime)
         {
-            _transform.Translate(_translation * pDeltaTime, Space.World);
+            Vector3 curPos = _transform.position;
+            _transform.position =
+                Vector3.SmoothDamp(curPos, curPos + _translation, ref _velocity, 0.5f);
         }
 
         public override void CleanUp()

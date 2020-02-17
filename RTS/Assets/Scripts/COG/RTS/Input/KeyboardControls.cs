@@ -27,6 +27,14 @@ namespace COG.RTS.Input
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseMovement"",
+                    ""type"": ""Button"",
+                    ""id"": ""60e86a0d-4361-41c6-b2ae-af3f66954314"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,28 @@ namespace COG.RTS.Input
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d49bb760-a015-481a-9c2a-2d7c5c453886"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a43673b1-02db-4bec-9870-1826c9495155"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -148,6 +178,7 @@ namespace COG.RTS.Input
             // GamePlay
             m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
             m_GamePlay_CameraMovement = m_GamePlay.FindAction("CameraMovement", throwIfNotFound: true);
+            m_GamePlay_MouseMovement = m_GamePlay.FindAction("MouseMovement", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -198,11 +229,13 @@ namespace COG.RTS.Input
         private readonly InputActionMap m_GamePlay;
         private IGamePlayActions m_GamePlayActionsCallbackInterface;
         private readonly InputAction m_GamePlay_CameraMovement;
+        private readonly InputAction m_GamePlay_MouseMovement;
         public struct GamePlayActions
         {
             private @KeyboardControls m_Wrapper;
             public GamePlayActions(@KeyboardControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @CameraMovement => m_Wrapper.m_GamePlay_CameraMovement;
+            public InputAction @MouseMovement => m_Wrapper.m_GamePlay_MouseMovement;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -215,6 +248,9 @@ namespace COG.RTS.Input
                     @CameraMovement.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCameraMovement;
+                    @MouseMovement.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
+                    @MouseMovement.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
+                    @MouseMovement.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -222,6 +258,9 @@ namespace COG.RTS.Input
                     @CameraMovement.started += instance.OnCameraMovement;
                     @CameraMovement.performed += instance.OnCameraMovement;
                     @CameraMovement.canceled += instance.OnCameraMovement;
+                    @MouseMovement.started += instance.OnMouseMovement;
+                    @MouseMovement.performed += instance.OnMouseMovement;
+                    @MouseMovement.canceled += instance.OnMouseMovement;
                 }
             }
         }
@@ -229,6 +268,7 @@ namespace COG.RTS.Input
         public interface IGamePlayActions
         {
             void OnCameraMovement(InputAction.CallbackContext context);
+            void OnMouseMovement(InputAction.CallbackContext context);
         }
     }
 }

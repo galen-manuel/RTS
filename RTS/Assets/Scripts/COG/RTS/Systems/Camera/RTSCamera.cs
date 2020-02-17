@@ -16,6 +16,8 @@ namespace  COG.RTS.Systems.Camera
         {
             base.Init();
 
+            Cursor.lockState = CursorLockMode.Confined;
+
             CameraInput = GetComponent<CameraInput>();
             CameraMovement = GetComponent<CameraMovement>();
             
