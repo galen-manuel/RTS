@@ -11,16 +11,31 @@
             <e p="RTS" t="Include">
               <e p="CogBehaviour.cs" t="Include" />
               <e p="CogBehaviourSystem.cs" t="Include" />
+              <e p="Input" t="Include">
+                <e p="KeyboardControls.cs" t="Include" />
+              </e>
+              <e p="RuntimeSet.cs" t="Include" />
               <e p="StartUp.cs" t="Include" />
               <e p="Systems" t="Include">
                 <e p="Camera" t="Include">
                   <e p="CameraInput.cs" t="Include" />
                   <e p="CameraMovement.cs" t="Include" />
                   <e p="CameraSystem.cs" t="Include" />
+                  <e p="InputBehaviours" t="Include">
+                    <e p="CameraInputBehaviour.cs" t="Include" />
+                    <e p="ICameraInputBehaviour.cs" t="Include" />
+                    <e p="RotateAroundCenterCameraInput.cs" t="Include" />
+                    <e p="ScreenEdgeCameraInput.cs" t="Include" />
+                    <e p="WASDArrowCameraInput.cs" t="Include" />
+                  </e>
                   <e p="RTSCamera.cs" t="Include" />
                 </e>
                 <e p="ISystem.cs" t="Include" />
                 <e p="MasterSystem.cs" t="Include" />
+              </e>
+              <e p="Variables" t="Include">
+                <e p="FloatReference.cs" t="Include" />
+                <e p="FloatVariable.cs" t="Include" />
               </e>
             </e>
           </e>

@@ -20,6 +20,22 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ShouldRotateCamera",
+                    "type": "Button",
+                    "id": "c7d3624a-aafd-4436-9747-e5cfa0ed504a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MouseDelta",
+                    "type": "Button",
+                    "id": "c33d4b15-454f-449d-b2df-d6b19707d8bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -146,12 +162,23 @@
                 },
                 {
                     "name": "",
-                    "id": "a43673b1-02db-4bec-9870-1826c9495155",
-                    "path": "<Mouse>/delta",
+                    "id": "bce8ae22-7564-4ec1-87d5-57ac780d85b9",
+                    "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseMovement",
+                    "action": "ShouldRotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f1c99d6-e586-415d-896b-9c1bf766eb73",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

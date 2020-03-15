@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace COG.RTS.Systems
+namespace COG.RTS
 {
     public class MasterSystem : MonoBehaviour
     {
@@ -73,7 +73,7 @@ namespace COG.RTS.Systems
                 }
             }
 
-            return default(T);
+            return null;
         }
 
         private void OnDestroy()

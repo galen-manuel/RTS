@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace COG.RTS.Systems.Camera
+namespace COG.RTS
 {
     public class CameraSystem : MonoBehaviour, ISystem
     {
@@ -20,6 +20,7 @@ namespace COG.RTS.Systems.Camera
             }
             
             RTSCamera rtsCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
+            
 
             _cameraInput = rtsCamera.CameraInput;
             _cameraMovement = rtsCamera.CameraMovement;

@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using COG.RTS.Systems;
-using COG.RTS.Systems.Camera;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 

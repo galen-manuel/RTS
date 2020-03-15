@@ -35,6 +35,22 @@ namespace COG.RTS.Input
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShouldRotateCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7d3624a-aafd-4436-9747-e5cfa0ed504a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""Button"",
+                    ""id"": ""c33d4b15-454f-449d-b2df-d6b19707d8bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -161,12 +177,23 @@ namespace COG.RTS.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a43673b1-02db-4bec-9870-1826c9495155"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""bce8ae22-7564-4ec1-87d5-57ac780d85b9"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseMovement"",
+                    ""action"": ""ShouldRotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f1c99d6-e586-415d-896b-9c1bf766eb73"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -179,6 +206,8 @@ namespace COG.RTS.Input
             m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
             m_GamePlay_CameraMovement = m_GamePlay.FindAction("CameraMovement", throwIfNotFound: true);
             m_GamePlay_MouseMovement = m_GamePlay.FindAction("MouseMovement", throwIfNotFound: true);
+            m_GamePlay_ShouldRotateCamera = m_GamePlay.FindAction("ShouldRotateCamera", throwIfNotFound: true);
+            m_GamePlay_MouseDelta = m_GamePlay.FindAction("MouseDelta", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -230,12 +259,16 @@ namespace COG.RTS.Input
         private IGamePlayActions m_GamePlayActionsCallbackInterface;
         private readonly InputAction m_GamePlay_CameraMovement;
         private readonly InputAction m_GamePlay_MouseMovement;
+        private readonly InputAction m_GamePlay_ShouldRotateCamera;
+        private readonly InputAction m_GamePlay_MouseDelta;
         public struct GamePlayActions
         {
             private @KeyboardControls m_Wrapper;
             public GamePlayActions(@KeyboardControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @CameraMovement => m_Wrapper.m_GamePlay_CameraMovement;
             public InputAction @MouseMovement => m_Wrapper.m_GamePlay_MouseMovement;
+            public InputAction @ShouldRotateCamera => m_Wrapper.m_GamePlay_ShouldRotateCamera;
+            public InputAction @MouseDelta => m_Wrapper.m_GamePlay_MouseDelta;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -251,6 +284,12 @@ namespace COG.RTS.Input
                     @MouseMovement.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
                     @MouseMovement.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
                     @MouseMovement.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
+                    @ShouldRotateCamera.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
+                    @ShouldRotateCamera.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
+                    @ShouldRotateCamera.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
+                    @MouseDelta.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
+                    @MouseDelta.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
+                    @MouseDelta.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -261,6 +300,12 @@ namespace COG.RTS.Input
                     @MouseMovement.started += instance.OnMouseMovement;
                     @MouseMovement.performed += instance.OnMouseMovement;
                     @MouseMovement.canceled += instance.OnMouseMovement;
+                    @ShouldRotateCamera.started += instance.OnShouldRotateCamera;
+                    @ShouldRotateCamera.performed += instance.OnShouldRotateCamera;
+                    @ShouldRotateCamera.canceled += instance.OnShouldRotateCamera;
+                    @MouseDelta.started += instance.OnMouseDelta;
+                    @MouseDelta.performed += instance.OnMouseDelta;
+                    @MouseDelta.canceled += instance.OnMouseDelta;
                 }
             }
         }
@@ -269,6 +314,8 @@ namespace COG.RTS.Input
         {
             void OnCameraMovement(InputAction.CallbackContext context);
             void OnMouseMovement(InputAction.CallbackContext context);
+            void OnShouldRotateCamera(InputAction.CallbackContext context);
+            void OnMouseDelta(InputAction.CallbackContext context);
         }
     }
 }

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace COG.RTS.Systems.Camera
+namespace COG.RTS
 {
     public class CameraMovement : CogBehaviour
     {
-        public float XSpeed;
-        public float ZSpeed;
+        public FloatReference XSpeed;
+        public FloatReference ZSpeed;
+        [Tooltip("The higher the number the slower the camera rotates.")]
+        public FloatReference RotationDivisor;
+        public LayerMask CameraPlaneLayerMask;
         
         private Transform _target;
         private Transform _transform;
@@ -16,6 +19,10 @@ namespace COG.RTS.Systems.Camera
         private Vector3 _velocity;
 
         private RTSCamera _rtsCamera;
+        
+        private bool _isRotating;
+        private float _deltaX;
+        private Vector3 _centreScreenPosition;
         
         public void Init(RTSCamera pRtsCamera)
         {
@@ -30,14 +37,26 @@ namespace COG.RTS.Systems.Camera
 
         public override void CustomUpdate(float pDt)
         {
-            _translation.Set(_inputVector.x * XSpeed, 0, _inputVector.y * ZSpeed);
+            if (_isRotating == false)
+            {
+                _translation.Set(_inputVector.x * XSpeed.Value, 0, _inputVector.y * ZSpeed.Value);
+                _translation = Quaternion.Euler(0, _transform.eulerAngles.y, 0) * _translation;
+            }
         }
 
         public override void CustomLateUpdate(float pDeltaTime)
         {
-            Vector3 curPos = _transform.position;
-            _transform.position =
-                Vector3.SmoothDamp(curPos, curPos + _translation, ref _velocity, 0.5f);
+            if (_isRotating)
+            {
+                _transform.RotateAround(_centreScreenPosition, Vector3.up, _deltaX / RotationDivisor.Value);
+            }
+            else
+            {
+                Vector3 curPos = _transform.position;
+                _transform.position =
+                    Vector3.SmoothDamp(curPos, curPos + _translation, ref _velocity, 0.5f);
+            }
+            
         }
 
         public override void CleanUp()
@@ -48,6 +67,29 @@ namespace COG.RTS.Systems.Camera
         public void SetInput(Vector2 pMovement)
         {
             _inputVector = pMovement;
+        }
+
+        public void SetMouseDeltaX(float pDeltaX)
+        {
+            _deltaX = pDeltaX;
+        }
+
+        public void StartRotating()
+        {
+            Ray r = _rtsCamera.UnityCamera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f));
+            
+            if (!Physics.Raycast(r, out RaycastHit hit, CameraPlaneLayerMask))
+            {
+                return;
+            }
+
+            _isRotating = true;
+            _centreScreenPosition = hit.point;
+        }
+
+        public void StopRotating()
+        {
+            _isRotating = false;
         }
 
         public void SetTarget(Transform pTarget)

@@ -1,4 +1,4 @@
-﻿namespace COG.RTS.Systems
+﻿namespace COG.RTS
 {
     public interface ISystem
     {

@@ -111,8 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e60af66ffe1abc4fb88eb0472987cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XSpeed: 6
-  ZSpeed: 6
+  XSpeed:
+    UseConstant: 1
+    ConstantValue: 6
+    Variable: {fileID: 0}
+  ZSpeed:
+    UseConstant: 1
+    ConstantValue: 6
+    Variable: {fileID: 0}
+  RotationDivisor:
+    UseConstant: 1
+    ConstantValue: 10
+    Variable: {fileID: 0}
+  CameraPlaneLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1272903329091805466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +168,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6cb0f0b6-5297-4e17-9adc-b316e15673fe
     m_ActionName: GamePlay/CameraMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 60e86a0d-4361-41c6-b2ae-af3f66954314
+    m_ActionName: GamePlay/MouseMovement[/Mouse/position,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7d3624a-aafd-4436-9747-e5cfa0ed504a
+    m_ActionName: GamePlay/ShouldRotateCamera[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamePlay

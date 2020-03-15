@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using COG.RTS.Systems;
 using UnityEngine;
 
 namespace COG.RTS 

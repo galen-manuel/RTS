@@ -176,6 +176,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tiles
       objectReference: {fileID: 0}
+    - target: {fileID: 589707323861668653, guid: 59554fceff88b2346ac2531a3071ce31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679879300891340222, guid: 59554fceff88b2346ac2531a3071ce31,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4708747079151657025, guid: 59554fceff88b2346ac2531a3071ce31,
         type: 3}
       propertyPath: m_Enabled
@@ -17340,3 +17350,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59554fceff88b2346ac2531a3071ce31, type: 3}
+--- !u!1 &1029690825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4679879300891340222, guid: 59554fceff88b2346ac2531a3071ce31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1029690824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1029690826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029690825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 36.12, y: 20.760006, z: 0}
+  m_Center: {x: 0, y: 5.1200013, z: 0}
