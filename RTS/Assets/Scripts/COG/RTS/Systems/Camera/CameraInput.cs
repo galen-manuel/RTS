@@ -48,10 +48,16 @@ namespace COG.RTS
                                                                               ModifyName = _keyboardControls.GamePlay.ShouldRotateCamera.name,
                                                                               Priority = 2
                                                                           };
+            ScrollWheelZoom scrollWheelZoom = new ScrollWheelZoom()
+                                              {
+                                                  ActionName = _keyboardControls.GamePlay.MouseWheelDelta.name,
+                                                  Priority = 3
+                                              };
             
             _cameraInputBehaviours.Add(wasdArrowCameraInput);
-            _cameraInputBehaviours.Add(screenEdgeCameraInput);
+            // _cameraInputBehaviours.Add(screenEdgeCameraInput);
             _cameraInputBehaviours.Add(rotateAroundCenterCameraInput);
+            _cameraInputBehaviours.Add(scrollWheelZoom);
             
             _cameraInputBehaviours.Sort((pX, pY) => pX.Priority.CompareTo(pY.Priority));
         }
@@ -85,7 +91,7 @@ namespace COG.RTS
         {
             for (int i = _cameraInputBehaviours.Count - 1; i >= 0; i--)
             {
-                _cameraInputBehaviours[i].ListenAction(pCallbackContext.action, _rtsCamera.CameraMovement);
+                _cameraInputBehaviours[i].ListenAction(pCallbackContext.action, _rtsCamera.CameraRig);
             }
         }
     }

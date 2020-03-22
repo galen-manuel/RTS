@@ -9,7 +9,7 @@ namespace COG.RTS
         public string ActionName { get; set; }
         public string ModifyName { get; set; }
 
-        public abstract void ListenAction(InputAction pInputAction, CameraMovement pCameraMovement);
+        public abstract void ListenAction(InputAction pInputAction, CameraRig pCameraRig);
         protected virtual bool IsInterested(string pActionName) => ActionName == pActionName;
     }
 }

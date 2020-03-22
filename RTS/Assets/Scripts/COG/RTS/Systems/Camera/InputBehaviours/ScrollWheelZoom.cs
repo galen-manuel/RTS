@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace COG.RTS
 {
-    public class WasdArrowCameraInput : CameraInputBehaviour
+    public class ScrollWheelZoom : CameraInputBehaviour
     {
         public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
@@ -12,7 +14,7 @@ namespace COG.RTS
                 return;
             }
             
-            pCameraRig.SetInput(pInputAction.ReadValue<Vector2>());
+            pCameraRig.ModifyZoomFactor(pInputAction.ReadValue<float>() < 0 ? -1 : 1);
         }
     }
 }

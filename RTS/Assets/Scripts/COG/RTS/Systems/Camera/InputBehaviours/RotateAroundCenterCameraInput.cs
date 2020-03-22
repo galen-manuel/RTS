@@ -7,7 +7,7 @@ namespace COG.RTS
     public class RotateAroundCenterCameraInput : CameraInputBehaviour
     {
         private bool _middleMouseButtonDown;
-        public override void ListenAction(InputAction pInputAction, CameraMovement pCameraMovement)
+        public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
             if (!IsInterested(pInputAction.name))
             {
@@ -19,11 +19,11 @@ namespace COG.RTS
                 _middleMouseButtonDown = Convert.ToBoolean(pInputAction.ReadValue<float>());
                 if (_middleMouseButtonDown)
                 {
-                    pCameraMovement.StartRotating();
+                    pCameraRig.StartRotating();
                 }
                 else
                 {
-                    pCameraMovement.StopRotating();
+                    pCameraRig.StopRotating();
                 }
             }
             else if (pInputAction.name == ActionName)
@@ -33,7 +33,7 @@ namespace COG.RTS
                     return;
                 }
                 
-                pCameraMovement.SetMouseDeltaX(pInputAction.ReadValue<float>());
+                pCameraRig.SetMouseDeltaX(pInputAction.ReadValue<float>());
             }
         }
 

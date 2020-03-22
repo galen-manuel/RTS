@@ -10,7 +10,7 @@ namespace  COG.RTS
     public class RTSCamera : CogBehaviour
     {
         public CameraInput CameraInput { get; private set; }
-        public CameraMovement CameraMovement { get; private set; }
+        public CameraRig CameraRig { get; private set; }
         public Camera UnityCamera { get; private set; }
 
         public override void Init()
@@ -20,11 +20,11 @@ namespace  COG.RTS
             Cursor.lockState = CursorLockMode.Confined;
 
             CameraInput = GetComponent<CameraInput>();
-            CameraMovement = GetComponent<CameraMovement>();
-            UnityCamera = GetComponent<Camera>();
+            CameraRig = GetComponent<CameraRig>();
+            UnityCamera = CameraRig.UnityCamera;
             
             CameraInput.Init(this);
-            CameraMovement.Init(this);
+            CameraRig.Init(this);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace COG.RTS
 {
     public interface ICameraInputBehaviour
     {
-        void ListenAction(InputAction pInputAction, CameraMovement pCameraMovement);
+        void ListenAction(InputAction pInputAction, CameraRig pCameraRig);
     }
 }

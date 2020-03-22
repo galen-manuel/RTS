@@ -7,7 +7,7 @@ namespace COG.RTS
     public class CameraSystem : MonoBehaviour, ISystem
     {
         private CameraInput _cameraInput;
-        private CameraMovement _cameraMovement;
+        private CameraRig _cameraRig;
 
         public void InitSystem()
         {
@@ -23,19 +23,19 @@ namespace COG.RTS
             
 
             _cameraInput = rtsCamera.CameraInput;
-            _cameraMovement = rtsCamera.CameraMovement;
+            _cameraRig = rtsCamera.CameraRig;
         }
 
         public void UpdateSystem(float pDeltaTime)
         {
             _cameraInput.CustomUpdate(pDeltaTime);
-            _cameraMovement.CustomUpdate(pDeltaTime);
+            _cameraRig.CustomUpdate(pDeltaTime);
         }
 
         public void LateUpdateSystem(float pDeltaTime)
         {
             _cameraInput.CustomLateUpdate(pDeltaTime);
-            _cameraMovement.CustomLateUpdate(pDeltaTime);
+            _cameraRig.CustomLateUpdate(pDeltaTime);
         }
 
         public void PauseSystem()
@@ -51,7 +51,7 @@ namespace COG.RTS
         public void ShutdownSystem()
         {
             _cameraInput.CleanUp();
-            _cameraMovement.CleanUp();
+            _cameraRig.CleanUp();
         }
 
         public void StartSystem()

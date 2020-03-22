@@ -51,6 +51,14 @@ namespace COG.RTS.Input
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseWheelDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""9a74ec21-cd21-4e77-999f-4a6bbbaae6f0"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -196,6 +204,17 @@ namespace COG.RTS.Input
                     ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f629f28-32c3-4237-bdbc-d01da72f6518"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseWheelDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +227,7 @@ namespace COG.RTS.Input
             m_GamePlay_MouseMovement = m_GamePlay.FindAction("MouseMovement", throwIfNotFound: true);
             m_GamePlay_ShouldRotateCamera = m_GamePlay.FindAction("ShouldRotateCamera", throwIfNotFound: true);
             m_GamePlay_MouseDelta = m_GamePlay.FindAction("MouseDelta", throwIfNotFound: true);
+            m_GamePlay_MouseWheelDelta = m_GamePlay.FindAction("MouseWheelDelta", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -261,6 +281,7 @@ namespace COG.RTS.Input
         private readonly InputAction m_GamePlay_MouseMovement;
         private readonly InputAction m_GamePlay_ShouldRotateCamera;
         private readonly InputAction m_GamePlay_MouseDelta;
+        private readonly InputAction m_GamePlay_MouseWheelDelta;
         public struct GamePlayActions
         {
             private @KeyboardControls m_Wrapper;
@@ -269,6 +290,7 @@ namespace COG.RTS.Input
             public InputAction @MouseMovement => m_Wrapper.m_GamePlay_MouseMovement;
             public InputAction @ShouldRotateCamera => m_Wrapper.m_GamePlay_ShouldRotateCamera;
             public InputAction @MouseDelta => m_Wrapper.m_GamePlay_MouseDelta;
+            public InputAction @MouseWheelDelta => m_Wrapper.m_GamePlay_MouseWheelDelta;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -290,6 +312,9 @@ namespace COG.RTS.Input
                     @MouseDelta.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                     @MouseDelta.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                     @MouseDelta.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
+                    @MouseWheelDelta.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
+                    @MouseWheelDelta.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
+                    @MouseWheelDelta.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -306,6 +331,9 @@ namespace COG.RTS.Input
                     @MouseDelta.started += instance.OnMouseDelta;
                     @MouseDelta.performed += instance.OnMouseDelta;
                     @MouseDelta.canceled += instance.OnMouseDelta;
+                    @MouseWheelDelta.started += instance.OnMouseWheelDelta;
+                    @MouseWheelDelta.performed += instance.OnMouseWheelDelta;
+                    @MouseWheelDelta.canceled += instance.OnMouseWheelDelta;
                 }
             }
         }
@@ -316,6 +344,7 @@ namespace COG.RTS.Input
             void OnMouseMovement(InputAction.CallbackContext context);
             void OnShouldRotateCamera(InputAction.CallbackContext context);
             void OnMouseDelta(InputAction.CallbackContext context);
+            void OnMouseWheelDelta(InputAction.CallbackContext context);
         }
     }
 }

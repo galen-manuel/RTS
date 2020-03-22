@@ -9,7 +9,7 @@ namespace COG.RTS
         
         private Vector2 _previousInputVector;
         
-        public override void ListenAction(InputAction pInputAction, CameraMovement pCameraMovement)
+        public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
             if (!IsInterested(pInputAction.name))
             {
@@ -55,14 +55,14 @@ namespace COG.RTS
 
                 // If we were, pass along zero input once
                 _previousInputVector = inputVector;
-                pCameraMovement.SetInput(_previousInputVector);
+                pCameraRig.SetInput(_previousInputVector);
 
                 return;
             }
             // Normalize to match keyboard controls, which are normalized by Unity's input system
             inputVector.Normalize();
             // Pass along the current input vector
-            pCameraMovement.SetInput(_previousInputVector);
+            pCameraRig.SetInput(_previousInputVector);
             _previousInputVector = inputVector;
         }
     }
