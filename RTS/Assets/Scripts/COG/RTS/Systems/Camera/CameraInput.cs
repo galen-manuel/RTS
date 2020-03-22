@@ -9,6 +9,11 @@ namespace COG.RTS
 {
     public class CameraInput : CogBehaviour//, KeyboardControls.IGamePlayActions
     {
+        public bool WASDMovement = true;
+        public bool ScreenEdgeMovement = true;
+        public bool RotateAroundCenter = true;
+        public bool ScrollWheelZoom = true;
+        
         private KeyboardControls _keyboardControls;
         private RTSCamera _rtsCamera;
         private PlayerInput _playerInput;
@@ -34,28 +39,32 @@ namespace COG.RTS
             WasdArrowCameraInput wasdArrowCameraInput = new WasdArrowCameraInput()
                                                         {
                                                             ActionName = _keyboardControls.GamePlay.CameraMovement.name, 
-                                                            Priority = 1
+                                                            Priority = 1,
+                                                            Enabled = WASDMovement
                                                         };
             ScreenEdgeCameraInput screenEdgeCameraInput = new ScreenEdgeCameraInput()
                                                           {
                                                               ActionName = _keyboardControls.GamePlay.MouseMovement.name,
                                                               Priority = 0,
-                                                              ScreenDimensions = new Vector2(Screen.width, Screen.height)
+                                                              ScreenDimensions = new Vector2(Screen.width, Screen.height),
+                                                              Enabled = ScreenEdgeMovement
                                                           };
             RotateAroundCenterCameraInput rotateAroundCenterCameraInput = new RotateAroundCenterCameraInput()
                                                                           {
                                                                               ActionName = _keyboardControls.GamePlay.MouseDelta.name,
                                                                               ModifyName = _keyboardControls.GamePlay.ShouldRotateCamera.name,
-                                                                              Priority = 2
+                                                                              Priority = 2,
+                                                                              Enabled = RotateAroundCenter
                                                                           };
             ScrollWheelZoom scrollWheelZoom = new ScrollWheelZoom()
                                               {
                                                   ActionName = _keyboardControls.GamePlay.MouseWheelDelta.name,
-                                                  Priority = 3
+                                                  Priority = 3,
+                                                  Enabled = ScrollWheelZoom
                                               };
             
             _cameraInputBehaviours.Add(wasdArrowCameraInput);
-            // _cameraInputBehaviours.Add(screenEdgeCameraInput);
+            _cameraInputBehaviours.Add(screenEdgeCameraInput);
             _cameraInputBehaviours.Add(rotateAroundCenterCameraInput);
             _cameraInputBehaviours.Add(scrollWheelZoom);
             

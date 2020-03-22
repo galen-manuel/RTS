@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62f1ab0aae38d146b709401ba7ba634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WASDMovement: 1
+  ScreenEdgeMovement: 1
+  RotateAroundCenter: 1
+  ScrollWheelZoom: 1
 --- !u!114 &-6023309039993488163
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,11 @@ namespace COG.RTS
         private bool _middleMouseButtonDown;
         public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
+            if (!Enabled)
+            {
+                return;
+            }
+            
             if (!IsInterested(pInputAction.name))
             {
                 return;

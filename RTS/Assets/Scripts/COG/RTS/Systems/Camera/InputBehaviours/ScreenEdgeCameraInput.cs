@@ -11,6 +11,11 @@ namespace COG.RTS
         
         public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
+            if (!Enabled)
+            {
+                return;
+            }
+            
             if (!IsInterested(pInputAction.name))
             {
                 return;
