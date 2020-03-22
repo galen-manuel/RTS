@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/COG/RTS/Input/KeyboardControls.cs
   wrapperClassName: 
-  wrapperCodeNamespace: COG.RTS.Input
+  wrapperCodeNamespace: COG.RTS

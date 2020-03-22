@@ -14,7 +14,8 @@ namespace COG.RTS
         private enum State
         {
             Normal,
-            Rotating
+            Rotating,
+            Dragging
         }
         
         public FloatReference XSpeed;
@@ -23,6 +24,7 @@ namespace COG.RTS
         public FloatReference RotationDivisor;
         public LayerMask CameraPlaneLayerMask;
         public Transform CameraTransform;
+        
         [Header("Camera Zoom")]
         public FloatReference ZoomStep;
         public Vector3 NoZoomPosition;
@@ -30,6 +32,10 @@ namespace COG.RTS
         public FloatReference MinZoom;
         public FloatReference MaxZoom;
         public FloatReference ZoomSmoothTime;
+        
+        [Header("Click and Drag")] 
+        public FloatReference ClickAndDragSmoothTime;
+        public bool SyncMouseAndGroundMoveDirection;
         
         private Transform _target;
         private Transform _transform;
@@ -40,11 +46,13 @@ namespace COG.RTS
 
         private RTSCamera _rtsCamera;
         
-        private float _deltaX;
+        private Vector2 _deltaMousePos;
         private Vector3 _centreScreenPosition;
 
         private float _zoomPercentage;
         private Vector3 _zoomSmoothDampVelocity;
+        
+        private Vector3 _clickAndDragSmoothDampVelocity;
 
         public Camera UnityCamera => CameraTransform.GetComponent<Camera>();
 
@@ -55,6 +63,7 @@ namespace COG.RTS
             _transform = transform;
             _inputVector = new Vector2();
             _translation = new Vector3();
+            _deltaMousePos = new Vector2();
 
             _rtsCamera = pRtsCamera;
 
@@ -73,6 +82,10 @@ namespace COG.RTS
                     break;
                 case State.Rotating:
                     break;
+                case State.Dragging:
+                    _translation.Set(_deltaMousePos.x * XSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1), 0, _deltaMousePos.y * ZSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1));
+                    _translation = Quaternion.Euler(0, _transform.eulerAngles.y, 0) * _translation;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -80,15 +93,17 @@ namespace COG.RTS
 
         public override void CustomLateUpdate(float pDeltaTime)
         {
+            Vector3 curPos = _transform.position;
             switch (_state)
             {
                 case State.Normal:
-                    Vector3 curPos = _transform.position;
-                    Vector3 newPos = curPos + _translation;
-                    _transform.position = Vector3.SmoothDamp(curPos, newPos, ref _smoothDampVelocity, 0.5f);
+                    _transform.position = Vector3.SmoothDamp(curPos, curPos + _translation, ref _smoothDampVelocity, 0.5f);
                     break;
                 case State.Rotating:
-                    _transform.RotateAround(_centreScreenPosition, Vector3.up, _deltaX / RotationDivisor.Value);
+                    _transform.RotateAround(_centreScreenPosition, Vector3.up, _deltaMousePos.x / RotationDivisor.Value);
+                    break;
+                case State.Dragging:
+                    _transform.position = Vector3.SmoothDamp(curPos, curPos + _translation, ref _smoothDampVelocity, ClickAndDragSmoothTime.Value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -110,14 +125,14 @@ namespace COG.RTS
             _inputVector = pMovement;
         }
 
-        public void SetMouseDeltaX(float pDeltaX)
+        public void SetMouseDelta(Vector2 pDelta)
         {
-            if (_state != State.Rotating)
+            if (_state != State.Rotating && _state != State.Dragging)
             {
                 return;
             }
             
-            _deltaX = pDeltaX;
+            _deltaMousePos.Set(pDelta.x, pDelta.y);
         }
 
         public void StartRotating()
@@ -134,6 +149,16 @@ namespace COG.RTS
         }
 
         public void StopRotating()
+        {
+            _state = State.Normal;
+        }
+
+        public void StartDragging()
+        {
+            _state = State.Dragging;
+        }
+
+        public void StopDragging()
         {
             _state = State.Normal;
         }

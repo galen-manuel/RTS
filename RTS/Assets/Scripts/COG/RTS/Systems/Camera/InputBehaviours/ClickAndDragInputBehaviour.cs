@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace COG.RTS
 {
-    public class RotateAroundCenterCameraInput : CameraInputBehaviour
+    public class ClickAndDragInputBehaviour : CameraInputBehaviour
     {
-        private bool _middleMouseButtonDown;
+        private bool _rightMouseButtonDown;
         public override void ListenAction(InputAction pInputAction, CameraRig pCameraRig)
         {
             if (!Enabled)
@@ -22,19 +25,19 @@ namespace COG.RTS
 
             if (actionName == ModifyName)
             {
-                _middleMouseButtonDown = Convert.ToBoolean(pInputAction.ReadValue<float>());
-                if (_middleMouseButtonDown)
+                _rightMouseButtonDown = Convert.ToBoolean(pInputAction.ReadValue<float>());
+                if (_rightMouseButtonDown)
                 {
-                    pCameraRig.StartRotating();
+                    pCameraRig.StartDragging();
                 }
                 else
                 {
-                    pCameraRig.StopRotating();
+                    pCameraRig.StopDragging();
                 }
             }
             else if (actionName == ActionName)
             {
-                if (_middleMouseButtonDown == false)
+                if (_rightMouseButtonDown == false)
                 {
                     return;
                 }
@@ -43,7 +46,6 @@ namespace COG.RTS
             }
         }
 
-        protected override bool IsInterested(string pActionName) =>
-            ActionName == pActionName || ModifyName == pActionName;
-    }   
+        protected override bool IsInterested(string pActionName) => pActionName == ActionName || pActionName == ModifyName;
+    }
 }

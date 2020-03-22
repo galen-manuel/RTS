@@ -22,26 +22,34 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ShouldRotateCamera",
-                    "type": "Button",
-                    "id": "c7d3624a-aafd-4436-9747-e5cfa0ed504a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "MouseDelta",
-                    "type": "Button",
-                    "id": "c33d4b15-454f-449d-b2df-d6b19707d8bb",
-                    "expectedControlType": "",
+                    "type": "Value",
+                    "id": "c7d3624a-aafd-4436-9747-e5cfa0ed504a",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "MouseWheelDelta",
                     "type": "Value",
-                    "id": "9a74ec21-cd21-4e77-999f-4a6bbbaae6f0",
+                    "id": "c33d4b15-454f-449d-b2df-d6b19707d8bb",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ShouldClickAndDrag",
+                    "type": "Button",
+                    "id": "9a74ec21-cd21-4e77-999f-4a6bbbaae6f0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ShouldRotateCamera",
+                    "type": "Button",
+                    "id": "7b8e21e4-29ca-40a0-b7b6-a4f44a6a2fdc",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 }
@@ -170,19 +178,8 @@
                 },
                 {
                     "name": "",
-                    "id": "bce8ae22-7564-4ec1-87d5-57ac780d85b9",
-                    "path": "<Mouse>/middleButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ShouldRotateCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0f1c99d6-e586-415d-896b-9c1bf766eb73",
-                    "path": "<Mouse>/delta/x",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -198,6 +195,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseWheelDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0311ef56-ea62-4ec9-a863-7915db83af5e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShouldClickAndDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bce8ae22-7564-4ec1-87d5-57ac780d85b9",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShouldRotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

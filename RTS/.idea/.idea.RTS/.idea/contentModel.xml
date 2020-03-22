@@ -23,6 +23,7 @@
                   <e p="CameraSystem.cs" t="Include" />
                   <e p="InputBehaviours" t="Include">
                     <e p="CameraInputBehaviour.cs" t="Include" />
+                    <e p="ClickAndDragInputBehaviour.cs" t="Include" />
                     <e p="ICameraInputBehaviour.cs" t="Include" />
                     <e p="RotateAroundCenterCameraInput.cs" t="Include" />
                     <e p="ScreenEdgeCameraInput.cs" t="Include" />

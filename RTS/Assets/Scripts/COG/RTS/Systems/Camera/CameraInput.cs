@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using COG.RTS.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,8 @@ namespace COG.RTS
         public bool ScreenEdgeMovement = true;
         public bool RotateAroundCenter = true;
         public bool ScrollWheelZoom = true;
-        
+        public bool ClickAndDrag = true;
+
         private KeyboardControls _keyboardControls;
         private RTSCamera _rtsCamera;
         private PlayerInput _playerInput;
@@ -56,17 +56,25 @@ namespace COG.RTS
                                                                               Priority = 2,
                                                                               Enabled = RotateAroundCenter
                                                                           };
-            ScrollWheelZoom scrollWheelZoom = new ScrollWheelZoom()
+            ScrollWheelZoom scrollWheelZoomInput = new ScrollWheelZoom()
                                               {
                                                   ActionName = _keyboardControls.GamePlay.MouseWheelDelta.name,
                                                   Priority = 3,
                                                   Enabled = ScrollWheelZoom
                                               };
+            ClickAndDragInputBehaviour clickAndDragInput = new ClickAndDragInputBehaviour()
+                                                           {
+                                                               ActionName = _keyboardControls.GamePlay.MouseDelta.name,
+                                                               ModifyName = _keyboardControls.GamePlay.ShouldClickAndDrag.name,
+                                                               Priority = 4,
+                                                               Enabled = ClickAndDrag
+                                                           };
             
             _cameraInputBehaviours.Add(wasdArrowCameraInput);
             _cameraInputBehaviours.Add(screenEdgeCameraInput);
             _cameraInputBehaviours.Add(rotateAroundCenterCameraInput);
-            _cameraInputBehaviours.Add(scrollWheelZoom);
+            _cameraInputBehaviours.Add(scrollWheelZoomInput);
+            _cameraInputBehaviours.Add(clickAndDragInput);
             
             _cameraInputBehaviours.Sort((pX, pY) => pX.Priority.CompareTo(pY.Priority));
         }

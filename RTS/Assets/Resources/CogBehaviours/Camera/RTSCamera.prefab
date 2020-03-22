@@ -93,6 +93,11 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 0.2
     Variable: {fileID: 0}
+  ClickAndDragSmoothTime:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 0}
+  SyncMouseAndGroundMoveDirection: 0
 --- !u!114 &1272903329091805466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,9 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WASDMovement: 1
-  ScreenEdgeMovement: 1
+  ScreenEdgeMovement: 0
   RotateAroundCenter: 1
   ScrollWheelZoom: 1
+  ClickAndDrag: 1
 --- !u!114 &-6023309039993488163
 MonoBehaviour:
   m_ObjectHideFlags: 0

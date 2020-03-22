@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace COG.RTS.Input
+namespace COG.RTS
 {
     public class @KeyboardControls : IInputActionCollection, IDisposable
     {
@@ -37,26 +37,34 @@ namespace COG.RTS.Input
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ShouldRotateCamera"",
-                    ""type"": ""Button"",
-                    ""id"": ""c7d3624a-aafd-4436-9747-e5cfa0ed504a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""MouseDelta"",
-                    ""type"": ""Button"",
-                    ""id"": ""c33d4b15-454f-449d-b2df-d6b19707d8bb"",
-                    ""expectedControlType"": """",
+                    ""type"": ""Value"",
+                    ""id"": ""c7d3624a-aafd-4436-9747-e5cfa0ed504a"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""MouseWheelDelta"",
                     ""type"": ""Value"",
-                    ""id"": ""9a74ec21-cd21-4e77-999f-4a6bbbaae6f0"",
+                    ""id"": ""c33d4b15-454f-449d-b2df-d6b19707d8bb"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShouldClickAndDrag"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a74ec21-cd21-4e77-999f-4a6bbbaae6f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShouldRotateCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b8e21e4-29ca-40a0-b7b6-a4f44a6a2fdc"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -185,19 +193,8 @@ namespace COG.RTS.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bce8ae22-7564-4ec1-87d5-57ac780d85b9"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShouldRotateCamera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0f1c99d6-e586-415d-896b-9c1bf766eb73"",
-                    ""path"": ""<Mouse>/delta/x"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -215,6 +212,28 @@ namespace COG.RTS.Input
                     ""action"": ""MouseWheelDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0311ef56-ea62-4ec9-a863-7915db83af5e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShouldClickAndDrag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bce8ae22-7564-4ec1-87d5-57ac780d85b9"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShouldRotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,9 +244,10 @@ namespace COG.RTS.Input
             m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
             m_GamePlay_CameraMovement = m_GamePlay.FindAction("CameraMovement", throwIfNotFound: true);
             m_GamePlay_MouseMovement = m_GamePlay.FindAction("MouseMovement", throwIfNotFound: true);
-            m_GamePlay_ShouldRotateCamera = m_GamePlay.FindAction("ShouldRotateCamera", throwIfNotFound: true);
             m_GamePlay_MouseDelta = m_GamePlay.FindAction("MouseDelta", throwIfNotFound: true);
             m_GamePlay_MouseWheelDelta = m_GamePlay.FindAction("MouseWheelDelta", throwIfNotFound: true);
+            m_GamePlay_ShouldClickAndDrag = m_GamePlay.FindAction("ShouldClickAndDrag", throwIfNotFound: true);
+            m_GamePlay_ShouldRotateCamera = m_GamePlay.FindAction("ShouldRotateCamera", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -279,18 +299,20 @@ namespace COG.RTS.Input
         private IGamePlayActions m_GamePlayActionsCallbackInterface;
         private readonly InputAction m_GamePlay_CameraMovement;
         private readonly InputAction m_GamePlay_MouseMovement;
-        private readonly InputAction m_GamePlay_ShouldRotateCamera;
         private readonly InputAction m_GamePlay_MouseDelta;
         private readonly InputAction m_GamePlay_MouseWheelDelta;
+        private readonly InputAction m_GamePlay_ShouldClickAndDrag;
+        private readonly InputAction m_GamePlay_ShouldRotateCamera;
         public struct GamePlayActions
         {
             private @KeyboardControls m_Wrapper;
             public GamePlayActions(@KeyboardControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @CameraMovement => m_Wrapper.m_GamePlay_CameraMovement;
             public InputAction @MouseMovement => m_Wrapper.m_GamePlay_MouseMovement;
-            public InputAction @ShouldRotateCamera => m_Wrapper.m_GamePlay_ShouldRotateCamera;
             public InputAction @MouseDelta => m_Wrapper.m_GamePlay_MouseDelta;
             public InputAction @MouseWheelDelta => m_Wrapper.m_GamePlay_MouseWheelDelta;
+            public InputAction @ShouldClickAndDrag => m_Wrapper.m_GamePlay_ShouldClickAndDrag;
+            public InputAction @ShouldRotateCamera => m_Wrapper.m_GamePlay_ShouldRotateCamera;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -306,15 +328,18 @@ namespace COG.RTS.Input
                     @MouseMovement.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
                     @MouseMovement.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
                     @MouseMovement.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseMovement;
-                    @ShouldRotateCamera.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
-                    @ShouldRotateCamera.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
-                    @ShouldRotateCamera.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
                     @MouseDelta.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                     @MouseDelta.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                     @MouseDelta.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseDelta;
                     @MouseWheelDelta.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
                     @MouseWheelDelta.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
                     @MouseWheelDelta.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMouseWheelDelta;
+                    @ShouldClickAndDrag.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldClickAndDrag;
+                    @ShouldClickAndDrag.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldClickAndDrag;
+                    @ShouldClickAndDrag.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldClickAndDrag;
+                    @ShouldRotateCamera.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
+                    @ShouldRotateCamera.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
+                    @ShouldRotateCamera.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShouldRotateCamera;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -325,15 +350,18 @@ namespace COG.RTS.Input
                     @MouseMovement.started += instance.OnMouseMovement;
                     @MouseMovement.performed += instance.OnMouseMovement;
                     @MouseMovement.canceled += instance.OnMouseMovement;
-                    @ShouldRotateCamera.started += instance.OnShouldRotateCamera;
-                    @ShouldRotateCamera.performed += instance.OnShouldRotateCamera;
-                    @ShouldRotateCamera.canceled += instance.OnShouldRotateCamera;
                     @MouseDelta.started += instance.OnMouseDelta;
                     @MouseDelta.performed += instance.OnMouseDelta;
                     @MouseDelta.canceled += instance.OnMouseDelta;
                     @MouseWheelDelta.started += instance.OnMouseWheelDelta;
                     @MouseWheelDelta.performed += instance.OnMouseWheelDelta;
                     @MouseWheelDelta.canceled += instance.OnMouseWheelDelta;
+                    @ShouldClickAndDrag.started += instance.OnShouldClickAndDrag;
+                    @ShouldClickAndDrag.performed += instance.OnShouldClickAndDrag;
+                    @ShouldClickAndDrag.canceled += instance.OnShouldClickAndDrag;
+                    @ShouldRotateCamera.started += instance.OnShouldRotateCamera;
+                    @ShouldRotateCamera.performed += instance.OnShouldRotateCamera;
+                    @ShouldRotateCamera.canceled += instance.OnShouldRotateCamera;
                 }
             }
         }
@@ -342,9 +370,10 @@ namespace COG.RTS.Input
         {
             void OnCameraMovement(InputAction.CallbackContext context);
             void OnMouseMovement(InputAction.CallbackContext context);
-            void OnShouldRotateCamera(InputAction.CallbackContext context);
             void OnMouseDelta(InputAction.CallbackContext context);
             void OnMouseWheelDelta(InputAction.CallbackContext context);
+            void OnShouldClickAndDrag(InputAction.CallbackContext context);
+            void OnShouldRotateCamera(InputAction.CallbackContext context);
         }
     }
 }
