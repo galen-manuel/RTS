@@ -36,7 +36,7 @@
                 <e p="MasterSystem.cs" t="Include" />
               </e>
               <e p="Testing" t="Include">
-                <e p="TransportGroupUI.cs" t="Include" />
+                <e p="ChangePositionGroupUI.cs" t="Include" />
               </e>
               <e p="Variables" t="Include">
                 <e p="FloatReference.cs" t="Include" />

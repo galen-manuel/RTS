@@ -39,6 +39,9 @@ namespace COG.RTS
         public bool SyncMouseAndGroundMoveDirection;
         
         private Transform _target;
+        private Vector3 _moveToTargetPosition;
+        private Action _moveToOnComplete;
+        
         private Transform _transform;
         private Vector2 _inputVector;
         private Vector3 _translation;
@@ -76,18 +79,26 @@ namespace COG.RTS
             switch (_state)
             {
                 case State.Normal:
+                    // Set translation
                     _translation.Set(_inputVector.x * XSpeed.Value, 0, _inputVector.y * ZSpeed.Value);
+                    // Rotate translation
                     _translation = Quaternion.Euler(0, _transform.eulerAngles.y, 0) * _translation;
+                    // Zoom camera
                     CameraTransform.localPosition = Vector3.SmoothDamp(CameraTransform.localPosition, 
                         Vector3.Lerp(NoZoomPosition, FullZoomPosition, _zoomPercentage / MaxZoom.Value), ref _zoomSmoothDampVelocity, ZoomSmoothTime.Value);
                     break;
                 case State.Rotating:
                     break;
                 case State.Dragging:
+                    // Set translation
                     _translation.Set(_deltaMousePos.x * XSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1), 0, _deltaMousePos.y * ZSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1));
+                    // Rotate translation
                     _translation = Quaternion.Euler(0, _transform.eulerAngles.y, 0) * _translation;
                     break;
                 case State.AutoMove:
+                    // Zoom camera
+                    CameraTransform.localPosition = Vector3.SmoothDamp(CameraTransform.localPosition, 
+                                                                       Vector3.Lerp(NoZoomPosition, FullZoomPosition, _zoomPercentage / MaxZoom.Value), ref _zoomSmoothDampVelocity, ZoomSmoothTime.Value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -100,16 +111,27 @@ namespace COG.RTS
             switch (_state)
             {
                 case State.Normal:
+                    // Smoothly move towards target position
                     _transform.position = Vector3.SmoothDamp(curPos, curPos + _translation, ref _smoothDampVelocity, 0.5f);
                     break;
                 case State.Rotating:
+                    // Rotate around the centre point of the screen
                     _transform.RotateAround(_centreScreenPosition, Vector3.up, _deltaMousePos.x / RotationDivisor.Value);
                     break;
                 case State.Dragging:
+                    // Smoothly move towards target position
                     _transform.position = Vector3.SmoothDamp(curPos, curPos + _translation, ref _smoothDampVelocity, ClickAndDragSmoothTime.Value);
                     break;
                 case State.AutoMove:
-
+                    // Smoothly move towards target position
+                    _transform.position =
+                        Vector3.SmoothDamp(curPos, _moveToTargetPosition, ref _smoothDampVelocity, 0.5f);
+                    // If we've reached our target, switch to normal state and invoke complete callback
+                    if (Vector3.Distance(curPos, _moveToTargetPosition) < 0.1f)
+                    {
+                        _state = State.Normal;
+                        _moveToOnComplete?.Invoke();
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -148,6 +170,11 @@ namespace COG.RTS
 
         public void StartRotating()
         {
+            if (_state == State.AutoMove)
+            {
+                return;
+            }
+            
             Ray r = _rtsCamera.UnityCamera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f));
             
             if (!Physics.Raycast(r, out RaycastHit hit, CameraPlaneLayerMask))
@@ -161,16 +188,31 @@ namespace COG.RTS
 
         public void StopRotating()
         {
+            if (_state == State.AutoMove)
+            {
+                return;
+            }
+            
             _state = State.Normal;
         }
 
         public void StartDragging()
         {
+            if (_state == State.AutoMove)
+            {
+                return;
+            }
+            
             _state = State.Dragging;
         }
 
         public void StopDragging()
         {
+            if (_state == State.AutoMove)
+            {
+                return;
+            }
+            
             _state = State.Normal;
         }
 
@@ -190,9 +232,15 @@ namespace COG.RTS
             }
         }
 
-        public void MoveToPosition(Vector3 pNewPosition, bool pClearZoom = false)
+        public void MoveToPosition(Vector3 pNewPosition, Action pOnComplete = null, bool pClearZoom = false)
         {
-            
+            _state = State.AutoMove;
+            _moveToTargetPosition = pNewPosition;
+            _moveToOnComplete = pOnComplete;
+            if (pClearZoom)
+            {
+                ClearZoomFactor();
+            }
         }
     } 
 }
