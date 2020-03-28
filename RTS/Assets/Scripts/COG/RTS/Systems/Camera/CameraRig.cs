@@ -15,7 +15,8 @@ namespace COG.RTS
         {
             Normal,
             Rotating,
-            Dragging
+            Dragging,
+            AutoMove
         }
         
         public FloatReference XSpeed;
@@ -86,6 +87,8 @@ namespace COG.RTS
                     _translation.Set(_deltaMousePos.x * XSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1), 0, _deltaMousePos.y * ZSpeed.Value * (SyncMouseAndGroundMoveDirection ? 1 : -1));
                     _translation = Quaternion.Euler(0, _transform.eulerAngles.y, 0) * _translation;
                     break;
+                case State.AutoMove:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -105,6 +108,9 @@ namespace COG.RTS
                 case State.Dragging:
                     _transform.position = Vector3.SmoothDamp(curPos, curPos + _translation, ref _smoothDampVelocity, ClickAndDragSmoothTime.Value);
                     break;
+                case State.AutoMove:
+
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -113,6 +119,11 @@ namespace COG.RTS
         public void ModifyZoomFactor(float pModification)
         {
             _zoomPercentage = Mathf.Clamp(_zoomPercentage + pModification * ZoomStep.Value, MinZoom.Value, MaxZoom.Value);
+        }
+
+        public void ClearZoomFactor()
+        {
+            _zoomPercentage = 0;
         }
         
         public void SetInput(Vector2 pMovement)
@@ -166,6 +177,22 @@ namespace COG.RTS
         public void SetTarget(Transform pTarget)
         {
             _target = pTarget;
+        }
+
+        public void TransportToPosition(Vector3 pNewPosition, bool pClearZoom = false)
+        {
+            _state = State.Normal;
+            _translation.Set(0, 0, 0);
+            _transform.position = pNewPosition;
+            if (pClearZoom)
+            {
+                ClearZoomFactor();
+            }
+        }
+
+        public void MoveToPosition(Vector3 pNewPosition, bool pClearZoom = false)
+        {
+            
         }
     } 
 }
