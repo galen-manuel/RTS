@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9d327c502d9ab42965d77bdfc418c8, type: 3}
+  m_Name: Explosive
+  m_EditorClassIdentifier: 
+  DamageArmourPairs:
+  - ArmourType: {fileID: 11400000, guid: 5b17b97827ccbbe449f47083c746bfb5, type: 2}
+    DamagePercentage: 25
+  - ArmourType: {fileID: 11400000, guid: 59a65745a417bae4c91d16c6c82c9a8e, type: 2}
+    DamagePercentage: 75
+  - ArmourType: {fileID: 11400000, guid: 8fd06993717e1e946b307275013283ce, type: 2}
+    DamagePercentage: 50
+  - ArmourType: {fileID: 11400000, guid: 331c920ed9e0f224e8a642794664466e, type: 2}
+    DamagePercentage: 100
+  - ArmourType: {fileID: 11400000, guid: 5510f3162c6f08c4db3860c4d25c1137, type: 2}
+    DamagePercentage: 150
+  - ArmourType: {fileID: 11400000, guid: a9120d8f0630e554e87454589bc5366e, type: 2}
+    DamagePercentage: 150

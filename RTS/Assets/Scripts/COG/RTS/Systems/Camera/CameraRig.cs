@@ -53,7 +53,7 @@ namespace COG.RTS
         private Vector2 _deltaMousePos;
         private Vector3 _centreScreenPosition;
 
-        private float _zoomPercentage;
+        private float _zoomPercentage = 1;
         private Vector3 _zoomSmoothDampVelocity;
         
         private Vector3 _clickAndDragSmoothDampVelocity;
