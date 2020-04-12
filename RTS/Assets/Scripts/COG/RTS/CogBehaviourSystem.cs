@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using COG.RTS.Systems;
 using UnityEngine;
 
 namespace COG.RTS 
@@ -116,6 +115,20 @@ namespace COG.RTS
             _cogBehaviours.Add(cogBehaviour);
 
             return cogBehaviour;
+        }
+
+        public T LoadBehaviour<T>(string path = "") where T : CogBehaviour
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                path = nameof(T);
+            }
+            
+            T cogBehavior = Instantiate(Resources.Load<T>($"CogBehaviours/{path}"));
+            cogBehavior.Init();
+            _cogBehaviours.Add(cogBehavior);
+
+            return cogBehavior;
         }
 
         public void RegisterUpdateFunction(Action<float> pUpdateFunction)

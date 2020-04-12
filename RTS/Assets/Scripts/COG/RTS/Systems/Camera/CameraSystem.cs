@@ -2,30 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace COG.RTS.Systems.Camera
+namespace COG.RTS
 {
     public class CameraSystem : MonoBehaviour, ISystem
     {
         private CameraInput _cameraInput;
-        private CameraMovement _cameraMovement;
+        private CameraRig _cameraRig;
 
         public void InitSystem()
         {
-            GameObject mainCameraGo = null;
-            UnityEngine.Camera mainCamera = UnityEngine.Camera.main;
-
-            // Grab main camera game object or create one
-            if (mainCamera == null)
-            {
-                mainCameraGo = new GameObject("MainCamera");
-                mainCamera = mainCameraGo.AddComponent<UnityEngine.Camera>();
-                mainCameraGo.tag = "MainCamera";
-            }
-            else
-            {
-                mainCameraGo = mainCamera.gameObject;
-            }
-            
             CogBehaviourSystem cogBehaviourSystem = MasterSystem.Instance.GetSystem<CogBehaviourSystem>();
 
             if (cogBehaviourSystem == null)
@@ -33,53 +18,50 @@ namespace COG.RTS.Systems.Camera
                 Debug.LogError("CogBehaviourSystem is NULL!");
                 return;
             }
+            
+            RTSCamera rtsCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
+            
 
-            _cameraInput = cogBehaviourSystem.AddBehaviour<CameraInput>(mainCameraGo);
-
-            _cameraMovement = cogBehaviourSystem.AddBehaviour<CameraMovement>(mainCameraGo);
-            _cameraMovement.XSpeed = 5;
-            _cameraMovement.ZSpeed = 5;
-
-            _cameraInput.Init();
-            _cameraMovement.Init();
+            _cameraInput = rtsCamera.CameraInput;
+            _cameraRig = rtsCamera.CameraRig;
         }
 
         public void UpdateSystem(float pDeltaTime)
         {
             _cameraInput.CustomUpdate(pDeltaTime);
-            _cameraMovement.CustomUpdate(pDeltaTime);
+            _cameraRig.CustomUpdate(pDeltaTime);
         }
 
         public void LateUpdateSystem(float pDeltaTime)
         {
             _cameraInput.CustomLateUpdate(pDeltaTime);
-            _cameraMovement.CustomLateUpdate(pDeltaTime);
+            _cameraRig.CustomLateUpdate(pDeltaTime);
         }
 
         public void PauseSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.PauseSystem");
         }
 
         public void ResumeSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.ResumeSystem");
         }
 
         public void ShutdownSystem()
         {
             _cameraInput.CleanUp();
-            _cameraMovement.CleanUp();
+            _cameraRig.CleanUp();
         }
 
         public void StartSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.StartSystem");
         }
 
         public void StopSystem()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException($"{nameof(CameraSystem)}.StopSystem");
         }
     } 
 }

@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace COG.RTS.Systems
+namespace COG.RTS
 {
     public class MasterSystem : MonoBehaviour
     {
@@ -33,6 +33,11 @@ namespace COG.RTS.Systems
             foreach (ISystem system in _systems)
             {
                 system.UpdateSystem(Time.deltaTime);
+            }
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
         }
 
@@ -68,7 +73,7 @@ namespace COG.RTS.Systems
                 }
             }
 
-            return default(T);
+            return null;
         }
 
         private void OnDestroy()
