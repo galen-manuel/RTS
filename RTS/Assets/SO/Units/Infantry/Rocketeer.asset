@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435b92e0673e98440801c4a69abc41dc, type: 3}
+  m_Name: Rocketeer
+  m_EditorClassIdentifier: 
+  MaxHealth:
+    UseConstant: 1
+    ConstantValue: 125
+    Variable: {fileID: 0}
+  RateOfFire:
+    UseConstant: 1
+    ConstantValue: 3
+    Variable: {fileID: 0}
+  AttackType: {fileID: 11400000, guid: c3ab93a7a2d4933419a58bb2138fc750, type: 2}
+  AttackRange:
+    UseConstant: 1
+    ConstantValue: 14
+    Variable: {fileID: 0}
+  ProjectileSpeed:
+    UseConstant: 1
+    ConstantValue: 15
+    Variable: {fileID: 0}
+  CombatType: {fileID: 11400000, guid: e0844cb68f844ff42affb7203e26baf7, type: 2}
+  ArmourType: {fileID: 11400000, guid: 5b17b97827ccbbe449f47083c746bfb5, type: 2}
+  DamageType: {fileID: 11400000, guid: baed95e6fa66f9940adb10b37f20833d, type: 2}
+  DamageAmount:
+    UseConstant: 1
+    ConstantValue: 50
+    Variable: {fileID: 0}
+  SplashInfo:
+    Falloff:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Radius: 2
+  MovementSpeed:
+    UseConstant: 1
+    ConstantValue: 2
+    Variable: {fileID: 0}
+  SightRange:
+    UseConstant: 1
+    ConstantValue: 12
+    Variable: {fileID: 0}
+  Cost: 500
+  BuildTime:
+    UseConstant: 1
+    ConstantValue: 8
+    Variable: {fileID: 0}

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435b92e0673e98440801c4a69abc41dc, type: 3}
+  m_Name: Jetpack
+  m_EditorClassIdentifier: 
+  MaxHealth:
+    UseConstant: 1
+    ConstantValue: 50
+    Variable: {fileID: 0}
+  RateOfFire:
+    UseConstant: 1
+    ConstantValue: 5
+    Variable: {fileID: 0}
+  AttackType: {fileID: 11400000, guid: 7fe5019028887a5419f38e2bb545155a, type: 2}
+  AttackRange:
+    UseConstant: 1
+    ConstantValue: 30
+    Variable: {fileID: 0}
+  ProjectileSpeed:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  CombatType: {fileID: 11400000, guid: d91afdd0848415c42b12c039621124f0, type: 2}
+  ArmourType: {fileID: 11400000, guid: 5b17b97827ccbbe449f47083c746bfb5, type: 2}
+  DamageType: {fileID: 11400000, guid: 31cb928005474ad4589afcc109716636, type: 2}
+  DamageAmount:
+    UseConstant: 1
+    ConstantValue: 125
+    Variable: {fileID: 0}
+  SplashInfo:
+    Falloff:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Radius: 0
+  MovementSpeed:
+    UseConstant: 1
+    ConstantValue: 1.5
+    Variable: {fileID: 0}
+  SightRange:
+    UseConstant: 1
+    ConstantValue: 25
+    Variable: {fileID: 0}
+  Cost: 1200
+  BuildTime:
+    UseConstant: 1
+    ConstantValue: 25
+    Variable: {fileID: 0}
