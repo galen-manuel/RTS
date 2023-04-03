@@ -6,12 +6,14 @@ namespace COG.RTS
 {
     public class CameraSystem : MonoBehaviour, ISystem
     {
+        public RTSCamera RTSCamera { get; private set; }
+
         private CameraInput _cameraInput;
         private CameraRig _cameraRig;
 
-        public void InitSystem()
+        public void InitSystem(MasterSystem masterSystem)
         {
-            CogBehaviourSystem cogBehaviourSystem = MasterSystem.Instance.GetSystem<CogBehaviourSystem>();
+            CogBehaviourSystem cogBehaviourSystem = masterSystem.GetSystem<CogBehaviourSystem>();
 
             if (cogBehaviourSystem == null)
             {
@@ -19,11 +21,10 @@ namespace COG.RTS
                 return;
             }
             
-            RTSCamera rtsCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
-            
+            RTSCamera = cogBehaviourSystem.LoadBehaviour<RTSCamera>($"Camera/{nameof(RTSCamera)}");
 
-            _cameraInput = rtsCamera.CameraInput;
-            _cameraRig = rtsCamera.CameraRig;
+            _cameraInput = RTSCamera.CameraInput;
+            _cameraRig = RTSCamera.CameraRig;
         }
 
         public void UpdateSystem(float pDeltaTime)

@@ -53,7 +53,7 @@ namespace COG.RTS
         private Vector2 _deltaMousePos;
         private Vector3 _centreScreenPosition;
 
-        private float _zoomPercentage;
+        private float _zoomPercentage = 1;
         private Vector3 _zoomSmoothDampVelocity;
         
         private Vector3 _clickAndDragSmoothDampVelocity;
@@ -214,6 +214,7 @@ namespace COG.RTS
             }
             
             _state = State.Normal;
+            _deltaMousePos.Set(0, 0);
         }
 
         public void SetTarget(Transform pTarget)
@@ -242,5 +243,7 @@ namespace COG.RTS
                 ClearZoomFactor();
             }
         }
+
+        // TODO GM => Function to move to position that is looking at a position/target
     } 
 }

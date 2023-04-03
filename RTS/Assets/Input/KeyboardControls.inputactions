@@ -11,7 +11,8 @@
                     "id": "6cb0f0b6-5297-4e17-9adc-b316e15673fe",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MouseMovement",
@@ -19,7 +20,8 @@
                     "id": "60e86a0d-4361-41c6-b2ae-af3f66954314",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "MouseDelta",
@@ -27,7 +29,8 @@
                     "id": "c7d3624a-aafd-4436-9747-e5cfa0ed504a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MouseWheelDelta",
@@ -35,15 +38,17 @@
                     "id": "c33d4b15-454f-449d-b2df-d6b19707d8bb",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "ShouldClickAndDrag",
                     "type": "Button",
                     "id": "9a74ec21-cd21-4e77-999f-4a6bbbaae6f0",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ShouldRotateCamera",
@@ -51,7 +56,17 @@
                     "id": "7b8e21e4-29ca-40a0-b7b6-a4f44a6a2fdc",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightClick",
+                    "type": "Button",
+                    "id": "64b7ca34-d455-462d-b225-bf8f04efaf46",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -202,7 +217,7 @@
                     "name": "",
                     "id": "0311ef56-ea62-4ec9-a863-7915db83af5e",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "ShouldClickAndDrag",
@@ -217,6 +232,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShouldRotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e04da83-25c8-474d-a617-c7b560307e79",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -52,7 +52,7 @@ namespace COG.RTS
         public void RegisterSystem(ISystem pSystem)
         {
             _systems.Add(pSystem);
-            pSystem.InitSystem();
+            pSystem.InitSystem(this);
             pSystem.StartSystem();
         }
 

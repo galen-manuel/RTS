@@ -2,7 +2,7 @@
 {
     public interface ISystem
     {
-        void InitSystem();
+        void InitSystem(MasterSystem masterSystem);
         void StartSystem();
         void UpdateSystem(float pDeltaTime);
         void LateUpdateSystem(float pDeltaTime);
