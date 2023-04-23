@@ -1,0 +1,29 @@
+﻿namespace COG.RTS.BuildMenu
+{
+    public enum Buildable
+    {
+        Rifleman,
+        RocketMan,
+        JetpackMan,
+        Engineer,
+        Grenadier,
+        Tesla,
+        Scout,
+        RocketTruck,
+        Tank,
+        Transport,
+        Apc,
+        Miner,
+        CommandCentre,
+        OreProcessor,
+        Barracks,
+        LightVehicleFactory,
+        ScienceLab,
+        HeavyVehicleFactory,
+        OreStorage,
+        MiniGunTurret,
+        RocketTurret,
+        ShockTurret,
+        ShieldGenerator,
+    }
+}
